@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>樂高旋風忍者 LEGO NINJAGO — 新手教學簡報</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181c26;
+      --surface-light: #222836;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: radial-gradient(circle at top right, #1e2436, var(--bg) 60%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--gold), var(--red));
+      color: #111;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .slide-counter {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Progress bar */
+    .progress-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      width: 100%;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--red));
+      width: 10%;
+      transition: width 0.3s ease;
+    }
+
+    /* Stage */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 20px 100px;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 980px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px 48px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.25;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #fff 40%, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.85rem;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: #d1d5db;
+      line-height: 1.75;
+      margin-bottom: 26px;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .card {
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #d1d5db;
+      line-height: 1.65;
+    }
+
+    .card ul {
+      padding-left: 18px;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-left: 3px solid var(--gold);
+      padding-left: 22px;
+      margin-top: 14px;
+    }
+
+    .timeline-item {
+      position: relative;
+      background: var(--surface-light);
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 18px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid var(--surface);
+    }
+
+    .year {
+      font-weight: 800;
+      color: var(--gold);
+      margin-right: 8px;
+    }
+
+    /* Character Badges */
+    .ninja-card {
+      background: var(--surface-light);
+      border-radius: 14px;
+      padding: 16px;
+      border-top: 4px solid var(--gold);
+    }
+
+    .ninja-card.green { border-top-color: #22c55e; }
+    .ninja-card.red { border-top-color: #ef4444; }
+    .ninja-card.blue { border-top-color: #3b82f6; }
+    .ninja-card.black { border-top-color: #6b7280; }
+    .ninja-card.white { border-top-color: #e5e7eb; }
+    .ninja-card.cyan { border-top-color: #06b6d4; }
+    .ninja-card.orange { border-top-color: #f97316; }
+    .ninja-card.purple { border-top-color: #a855f7; }
+
+    .ninja-name {
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .ninja-power {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* Comparison box */
+    .vs-box {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 16px;
+    }
+
+    .vs-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    /* Quiz */
+    .quiz-item {
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .quiz-q {
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quiz-btn {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .quiz-btn:hover {
+      border-color: var(--gold);
+    }
+
+    .quiz-btn.correct {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: var(--green);
+      color: #86efac;
+    }
+
+    .quiz-btn.wrong {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--red);
+      color: #fca5a5;
+    }
+
+    .quiz-feedback {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Source footer inside slide */
+    .source-note {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Bottom Navigation */
+    nav.controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 17, 23, 0.92);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .nav-btn {
+      background: var(--surface-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, var(--gold), #ea580c);
+      color: #111;
+      border: none;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .slide { padding: 26px 20px; }
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.4rem; }
+      .vs-box { grid-template-columns: 1fr; }
+      .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span class="brand-badge">LLM WIKI</span>
+      <span>樂高旋風忍者 LEGO NINJAGO 入門教學</span>
+    </div>
+    <div class="slide-counter" id="counter">1 / 10</div>
+  </header>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <main>
+    <!-- Slide 1: Cover -->
+    <section class="slide active">
+      <span class="tag">教學型互動簡報｜給完全沒接觸過的新手</span>
+      <h1>5 分鐘看懂<br>樂高旋風忍者 LEGO NINJAGO</h1>
+      <p class="lead">
+        你一定聽過樂高，但你知道樂高史上最長壽、最成功的「原創故事系列」是什麼嗎？<br>
+        這份簡報整理自 <strong>LEGO NINJAGO LLM Wiki</strong>，帶你從零認識這個融合了東方武術、巨龍神話與科幻機甲的積木宇宙。
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>01｜品牌與歷史</h3>
+          <p>為何一個原定 3 年結束的玩具系列，能一路長紅 15 週年？</p>
+        </div>
+        <div class="card">
+          <h3>02｜世界觀與角色</h3>
+          <p>看懂創世神話、「大融合」事件，以及用顏色區分的元素忍者。</p>
+        </div>
+        <div class="card">
+          <h3>03｜玩具與跨媒體</h3>
+          <p>從實體對戰陀螺、泰坦機甲，一路玩進動畫、電影與樂高樂園。</p>
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/index.md（已整合 6 篇官方與百科資料）</div>
+    </section>
+
+    <!-- Slide 2: Overview -->
+    <section class="slide">
+      <span class="tag">單元一｜系列定位</span>
+      <h2>什麼是樂高旋風忍者？</h2>
+      <p class="lead">
+        <strong>LEGO NINJAGO</strong> 誕生於 <strong>2011 年</strong>，不同於《星際大戰》或《漫威》等外部授權 IP，它是由樂高內部團隊從零打造的原創常青系列（Evergreen Theme）。
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>三大風格混搭公式</h3>
+          <ul>
+            <li><strong>東方忍者武術</strong>：師徒傳承、寺廟修煉與「旋風忍術」。</li>
+            <li><strong>奇幻巨龍神話</strong>：創世神龍、魔法神器與多元領域。</li>
+            <li><strong>科幻機甲載具</strong>：重裝機器人、飛天戰艦與賽博都市。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>為何能熱賣超過 15 年？</h3>
+          <ul>
+            <li><strong>敘事驅動玩具</strong>：動畫劇情與每年兩波新品高度同步，玩家買的不只是積木，而是故事裡的英雄與名場景。</li>
+            <li><strong>題材幾乎無上限</strong>：世界觀同時容納古風與科幻，每一季都能翻新視覺風格。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/01-overview-and-history.md</div>
+    </section>
+
+    <!-- Slide 3: Timeline -->
+    <section class="slide">
+      <span class="tag">單元一｜發展史</span>
+      <h2>15 年關鍵里程碑（2011–2026）</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="year">2011</span>
+          <strong>系列誕生</strong>：以「陀螺對戰（Spinners）」與前導動畫登場，打破樂高偏重靜態拼砌的傳統。
+        </div>
+        <div class="timeline-item">
+          <span class="year">2012–2013</span>
+          <strong>粉絲逆轉命運</strong>：原本只規劃 2–3 年完結，但因全球銷量與粉絲呼聲過高，樂高決定改為長期連載。
+        </div>
+        <div class="timeline-item">
+          <span class="year">2017</span>
+          <strong>進軍大銀幕</strong>：推出《樂高旋風忍者電影》，並同步更新電視動畫的角色臉部與髮型設計。
+        </div>
+        <div class="timeline-item">
+          <span class="year">2023</span>
+          <strong>新世代重啟</strong>：經典 15 季完結後，開啟續作《旋風忍者：猛龍崛起》，引入新一代主角群。
+        </div>
+        <div class="timeline-item">
+          <span class="year">2026</span>
+          <strong>15 週年里程碑</strong>：累積推出超過 <strong>500 款盒組</strong> 與 <strong>200 集以上動畫</strong>。
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/01-overview-and-history.md</div>
+    </section>
+
+    <!-- Slide 4: Worldbuilding -->
+    <section class="slide">
+      <span class="tag">單元二｜世界觀</span>
+      <h2>從「創世神話」到「大融合」時代</h2>
+      <p class="lead">
+        傳說中，同時擁有龍族（創造）與鬼族（毀滅）血統的<strong>最初旋風忍術大師</strong>，用四把黃金神器創造了世界。而這座世界的版圖在 2023 年迎來了翻天覆地的劇變：
+      </p>
+      <div class="vs-box">
+        <div class="card">
+          <h3>經典時期：十六界（2011–2022）</h3>
+          <ul>
+            <li>旋風忍者世界只是多元宇宙中的「其中一界」。</li>
+            <li>其餘十五個平行領域（如鬼怪界、雲端王國）彼此獨立。</li>
+            <li>主線圍繞吳大師（光明）與哥哥伽瑪當（黑暗）的家族宿命展開。</li>
+          </ul>
+        </div>
+        <div class="vs-divider">➔</div>
+        <div class="card">
+          <h3>新紀元：大融合（2023–至今）</h3>
+          <ul>
+            <li>宇宙災變「<strong>大融合（The Merge）</strong>」將十六界強行拼湊成一個巨大世界。</li>
+            <li>各地頻發「融合地震」，舊角色、新種族與勢力被迫共存。</li>
+            <li>引入更高維度的「<strong>源龍（Source Dragons）</strong>」作為一切元素之力的本源。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/02-worldbuilding-and-lore.md</div>
+    </section>
+
+    <!-- Slide 5: Classic Characters -->
+    <section class="slide">
+      <span class="tag">單元三｜元老陣容</span>
+      <h2>新手必懂的「顏色＝能力」法則</h2>
+      <p class="lead">
+        在導師<strong>吳大師（Master Wu）</strong>帶領下，元老六人組各自代表一種鮮明色彩與元素之力，讓新手一眼就能記住角色定位：
+      </p>
+      <div class="grid-3">
+        <div class="ninja-card green">
+          <div class="ninja-name">勞埃德（Lloyd）</div>
+          <span class="ninja-power">綠色｜能量 Energy</span>
+          <p>傳說中的綠色忍者、團隊領袖，同時也是反派伽瑪當之子。</p>
+        </div>
+        <div class="ninja-card red">
+          <div class="ninja-name">赤地（Kai）</div>
+          <span class="ninja-power">紅色｜火 Fire</span>
+          <p>熱血衝動的鐵匠出身，戰鬥風格直接猛烈。</p>
+        </div>
+        <div class="ninja-card blue">
+          <div class="ninja-name">阿光（Jay）</div>
+          <span class="ninja-power">藍色｜閃電 Lightning</span>
+          <p>幽默話多的發明家，團隊裡的氣氛製造者。</p>
+        </div>
+        <div class="ninja-card black">
+          <div class="ninja-name">阿剛（Cole）</div>
+          <span class="ninja-power">黑色｜大地 Earth</span>
+          <p>沉穩可靠的力氣擔當，重視夥伴情誼。</p>
+        </div>
+        <div class="ninja-card white">
+          <div class="ninja-name">冰忍（Zane）</div>
+          <span class="ninja-power">白色｜寒冰 Ice</span>
+          <p>冷靜理性的機器人忍者（Nindroid），擅長戰術分析。</p>
+        </div>
+        <div class="ninja-card cyan">
+          <div class="ninja-name">赤蘭（Nya）</div>
+          <span class="ninja-power">水藍｜水 Water</span>
+          <p>赤地的妹妹，從「武士 X」一路覺醒成為水之大師。</p>
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/03-characters-and-elements.md</div>
+    </section>
+
+    <!-- Slide 6: New Gen & Combat -->
+    <section class="slide">
+      <span class="tag">單元三｜新世代與戰鬥系統</span>
+      <h2>《猛龍崛起》新主角 &amp; 旋風忍術</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>新世代夥伴（由勞埃德擔任導師）</h3>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+            <div><strong style="color:#f97316;">亞林（Arin）</strong>：沒有天生元素之力，卻自學領悟「物體旋風忍術」的普通少年。</div>
+            <div><strong style="color:#a855f7;">索拉（Sora）</strong>：掌控全新元素「<strong>科技</strong>」，能瞬間拆解並重組機械裝置。</div>
+            <div><strong style="color:#ef4444;">狂焰（Wyldfyre）</strong>：由龍養大的野性少女，掌控「<strong>熱能</strong>」。</div>
+            <div><strong style="color:#38bdf8;">利尤（Riyu）</strong>：擁有能量增幅能力的神祕小龍夥伴。</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>兩大核心超能力系統</h3>
+          <ul>
+            <li style="margin-bottom:10px;">
+              <strong>元素之力（Elemental Powers）</strong>：源自「源龍」的超自然能力，透過血脈或選定繼承，大融合後更誕生了許多新元素。
+            </li>
+            <li>
+              <strong>旋風忍術（Spinjitzu）</strong>：高速旋轉身體，將元素能量化為龍捲風的招牌武術；後來衍生出能升空的「飛天忍術」與對抗邪惡的「升龍忍術」。
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="source-note">知識來源：wiki/03-characters-and-elements.md</div>
+    </section>
+
+    <!-- Slide 7: Toys -->
+    <section class="slide">
+      <span class="tag">單元四｜實體玩具設計</span>
+      <h2>把動畫變成玩具：四大核心盒組</h2>
+      <p class="lead">
+        旋風忍者不只是靜態擺飾，設計團隊將「旋風忍術」做成可碰撞發射的<strong>陀螺系統（Spinners）</strong>，並建立四大主力產品線：
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>1. 機甲（Mechs）</h3>
+          <p>從迷你戰鬥服到超過 30 公分、關節高度可動的「泰坦機甲」，兼顧把玩與展示。</p>
+        </div>
+        <div class="card">
+          <h3>2. 飛龍（Dragons）</h3>
+          <p>結合積木關節與特色龍翼，每一季配合不同元素與劇情推出新造型。</p>
+        </div>
+        <div class="card">
+          <h3>3. 載具與移動基地</h3>
+          <p>包含跑車、重機，以及經典飛天帆船「<strong>命運賞賜號（Destiny's Bounty）</strong>」。</p>
